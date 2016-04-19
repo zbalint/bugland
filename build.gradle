@@ -11,13 +11,16 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
 jar {
-    baseName = 'gs-serving-web-content'
-    version = '0.1.0'
+    baseName = 'bugland'
+    version = '0.0.0'
+}
+
+springBoot {
+    mainClass = "hu.zbalint.bugland.Application"
 }
 
 repositories {
