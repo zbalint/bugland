@@ -13,3 +13,5 @@ hs_err_pid*
 
 # ide
 .idea
+
+application.properties
