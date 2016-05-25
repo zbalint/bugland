@@ -32,8 +32,8 @@
                 <li>
                     <a href="/post">Sample Post</a>
                 </li>
-                <li>
-                    <a href="/">Contact</a>
+                <li th:if="${user == null}">
+                    <a href="/login">Login</a>
                 </li>
             </ul>
         </div>

@@ -3,7 +3,7 @@
 <head></head>
 <body>
 <div th:fragment="homeContent" class="container">
-    loggedIn
+    <div th:text="${user.getFirstName() + ' ' + user.getLastName()}"></div>
 </div>
 </body>
 </html>

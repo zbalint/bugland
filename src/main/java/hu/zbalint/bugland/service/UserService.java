@@ -53,6 +53,10 @@ public class UserService {
         return user;
     }
 
+    public boolean isLoggedIn() {
+        return session.getAttribute("user") != null;
+    }
+
     public boolean hasRights() {
         return false;
     }

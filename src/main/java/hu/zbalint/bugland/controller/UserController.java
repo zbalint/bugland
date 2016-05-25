@@ -1,6 +1,5 @@
 package hu.zbalint.bugland.controller;
 
-
 import hu.zbalint.bugland.exception.AuthenticationException;
 import hu.zbalint.bugland.service.UserService;
 import org.slf4j.Logger;
@@ -22,11 +21,19 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
+        if (this.userService.isLoggedIn()) {
+            return "redirect:/";
+        }
+
         return "login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(Model model, String email, String password) {
+        if (this.userService.isLoggedIn()) {
+            return "redirect:/";
+        }
+
         try {
             model.addAttribute(this.userService.authenticate(email, password));
             log.info("Auth success");
