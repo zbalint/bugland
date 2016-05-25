@@ -4,6 +4,7 @@ import hu.zbalint.bugland.dao.UserDAO;
 import hu.zbalint.bugland.exception.AuthenticationException;
 import hu.zbalint.bugland.exception.NotLoggedInException;
 import hu.zbalint.bugland.model.User;
+import hu.zbalint.bugland.model.UserGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,10 @@ public class UserService {
         return user;
     }
 
+    public void logout() {
+        session.invalidate();
+    }
+
     public User getCurrentUser() throws NotLoggedInException {
         User user = (User) session.getAttribute("user");
         if (user == null) {
@@ -57,7 +62,17 @@ public class UserService {
         return session.getAttribute("user") != null;
     }
 
-    public boolean hasRights() {
+    public boolean hasRights(UserGroup group) {
+        try {
+            User user = this.getCurrentUser();
+            for (UserGroup userGroup : user.getGroups()) {
+                if (userGroup.getName().equals(group.getName())) {
+                    return true;
+                }
+            }
+        } catch (NotLoggedInException e) {
+            return false;
+        }
         return false;
     }
 }

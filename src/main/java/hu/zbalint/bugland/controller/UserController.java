@@ -10,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpSession;
-
 @Controller
 public class UserController {
     private static Logger log = LoggerFactory.getLogger(UserController.class);
@@ -47,8 +45,8 @@ public class UserController {
     }
 
     @RequestMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
+    public String logout() {
+        this.userService.logout();
         return "redirect:/";
     }
 }

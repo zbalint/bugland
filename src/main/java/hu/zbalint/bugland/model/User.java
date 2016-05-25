@@ -1,9 +1,7 @@
 package hu.zbalint.bugland.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -17,7 +15,23 @@ public class User {
     private String company = null;
     private String password;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private List<UserGroup> groups;
+
     protected User() {
+    }
+
+    public User(String firstName, String lastName, String nickName, String email, String company, String password, List<UserGroup> groups) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.nickName = nickName;
+        this.email = email;
+        this.company = company;
+        this.password = password;
+        this.groups = groups;
     }
 
     public User(String firstName, String lastName, String nickName, String email, String company, String password) {
@@ -90,5 +104,17 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<UserGroup> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<UserGroup> groups) {
+        this.groups = groups;
+    }
+
+    public void addGroup(UserGroup group) {
+        this.groups.add(group);
     }
 }
