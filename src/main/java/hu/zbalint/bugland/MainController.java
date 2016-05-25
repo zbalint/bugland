@@ -24,4 +24,9 @@ public class MainController {
     public String about() {
         return "about";
     }
+
+    @RequestMapping("/post")
+    public String post() {
+        return "post";
+    }
 }
