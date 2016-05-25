@@ -15,22 +15,25 @@ public class User {
     private String nickName = null;
     private String email;
     private String company = null;
+    private String password;
 
     protected User() {
     }
 
-    public User(String firstName, String lastName, String nickName, String email, String company) {
+    public User(String firstName, String lastName, String nickName, String email, String company, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nickName = nickName;
         this.email = email;
         this.company = company;
+        this.password = password;
     }
 
-    public User(String firstName, String lastName, String email) {
+    public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
     }
 
     public long getId() {
@@ -79,5 +82,13 @@ public class User {
 
     public void setCompany(String company) {
         this.company = company;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

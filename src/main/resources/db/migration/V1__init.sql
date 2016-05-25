@@ -4,10 +4,11 @@ CREATE TABLE user (
   last_name  VARCHAR(64),
   nick_name  VARCHAR(32)     DEFAULT NULL,
   email      VARCHAR(255),
-  company    VARCHAR(64)     DEFAULT NULL
+  company    VARCHAR(64)     DEFAULT NULL,
+  password   VARCHAR(1024)
 );
 
-INSERT INTO user (first_name, last_name, email) VALUES ('Test', 'Elek', 'test@elek.te');
+INSERT INTO user (first_name, last_name, email) VALUES ('Super', 'User', '');
 
 CREATE TABLE user_group (
   id   BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
