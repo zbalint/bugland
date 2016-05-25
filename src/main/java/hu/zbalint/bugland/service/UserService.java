@@ -20,13 +20,10 @@ public class UserService {
 
     @Autowired
     UserDAO userDAO;
-
     @Autowired
     HttpSession session;
 
     public User authenticate(String email, String password) throws AuthenticationException {
-        log.info(session.getId());
-
         List<User> userList = userDAO.findByEmail(email);
         User user = null;
         if (userList.size() == 1) {

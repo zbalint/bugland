@@ -32,6 +32,16 @@
                 <li>
                     <a href="/post">Sample Post</a>
                 </li>
+                <li th:if="${isAdmin != null and isAdmin == true}">
+                    <a href="/">Add article</a>
+                </li>
+                <li th:if="${isAdmin != null and isAdmin == true}">
+                    <a href="/">Add article</a>
+                </li>
+                <li th:if="${isAdmin != null and isAdmin == true}">
+                    <a href="/">Add article</a>
+                </li>
+
                 <li th:if="${user == null}">
                     <a href="/login">Login</a>
                 </li>

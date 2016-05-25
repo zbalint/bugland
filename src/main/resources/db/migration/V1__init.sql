@@ -8,7 +8,8 @@ CREATE TABLE user (
   password   VARCHAR(1024)
 );
 
-INSERT INTO user (first_name, last_name, email) VALUES ('Super', 'User', '');
+INSERT INTO user (first_name, last_name, email, password) VALUES ('Super', 'User', 'super@user.com', '12345');
+INSERT INTO user (first_name, last_name, email, password) VALUES ('Normal', 'User', 'normal@user.com', '12345');
 
 CREATE TABLE user_group (
   id   BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -21,7 +22,10 @@ CREATE TABLE user_roles (
 );
 
 INSERT INTO user_group (name) VALUES ('Admin');
+INSERT INTO user_group (name) VALUES ('User');
 INSERT INTO user_roles (user_id, group_id) VALUES (1, 1);
+INSERT INTO user_roles (user_id, group_id) VALUES (1, 2);
+INSERT INTO user_roles (user_id, group_id) VALUES (2, 2);
 
 CREATE TABLE article (
   name               VARCHAR(255),
