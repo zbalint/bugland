@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ArticleDAO extends CrudRepository<Article, Long> {
     List<Article> findById(long id);
+
+    List<Article> findByName(String name);
 }

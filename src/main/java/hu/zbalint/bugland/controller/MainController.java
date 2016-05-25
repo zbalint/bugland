@@ -1,10 +1,11 @@
-package hu.zbalint.bugland;
+package hu.zbalint.bugland.controller;
 
 import hu.zbalint.bugland.dao.UserDAO;
-import hu.zbalint.bugland.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class MainController {
@@ -13,9 +14,9 @@ public class MainController {
     UserDAO userDAO;
 
     @RequestMapping("/")
-    public String index() {
-        for (User user : userDAO.findById(2L)) {
-            System.out.println("************** " + user.getFirstName());
+    public String index(HttpSession session) {
+        if (session.getAttribute("user") != null) {
+            return "home";
         }
         return "index";
     }
