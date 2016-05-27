@@ -3,17 +3,18 @@ package hu.zbalint.bugland.service;
 import hu.zbalint.bugland.dao.UserDAO;
 import hu.zbalint.bugland.exception.AuthenticationException;
 import hu.zbalint.bugland.exception.NotLoggedInException;
+import hu.zbalint.bugland.exception.UserNotFoundException;
 import hu.zbalint.bugland.model.User;
 import hu.zbalint.bugland.model.UserGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-@Component
+@Service
 public class UserService {
 
     private static Logger log = LoggerFactory.getLogger(UserService.class);
@@ -44,6 +45,15 @@ public class UserService {
 
     public void logout() {
         session.invalidate();
+    }
+
+    public User getUserById(long id) throws UserNotFoundException {
+        List<User> users = this.userDAO.findById(id);
+        if (users.size() == 0) {
+            throw new UserNotFoundException("User not found with id: " + id);
+        }
+
+        return users.get(0);
     }
 
     public User getCurrentUser() throws NotLoggedInException {

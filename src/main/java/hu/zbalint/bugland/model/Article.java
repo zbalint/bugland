@@ -1,49 +1,63 @@
 package hu.zbalint.bugland.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    private String name;
+    private long id;
+    private String title;
+    private String subtitle;
     private String content;
     private Date releaseDate;
     private Date lastModifiedDate;
-    private long AuthorId;
-    private long ModifierId;
+    private long authorId;
+    private long modifierId;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "article_types",
+            joinColumns = @JoinColumn(name = "article_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private List<Category> categories;
 
     protected Article() {
     }
 
-    public Article(String name, String content, Date releaseDate, Date lastModifiedDate, long authorId, long modifierId) {
-        this.name = name;
+    public Article(String title, String subtitle, String content, Date releaseDate, Date lastModifiedDate, long authorId, long modifierId) {
+        this.title = title;
+        this.subtitle = subtitle;
         this.content = content;
         this.releaseDate = releaseDate;
         this.lastModifiedDate = lastModifiedDate;
-        AuthorId = authorId;
-        ModifierId = modifierId;
+        this.authorId = authorId;
+        this.modifierId = modifierId;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
     }
 
     public String getContent() {
@@ -71,18 +85,18 @@ public class Article {
     }
 
     public long getAuthorId() {
-        return AuthorId;
+        return authorId;
     }
 
     public void setAuthorId(long authorId) {
-        AuthorId = authorId;
+        this.authorId = authorId;
     }
 
     public long getModifierId() {
-        return ModifierId;
+        return modifierId;
     }
 
     public void setModifierId(long modifierId) {
-        ModifierId = modifierId;
+        this.modifierId = modifierId;
     }
 }

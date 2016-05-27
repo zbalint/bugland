@@ -3,7 +3,34 @@
 <head></head>
 <body>
 <div th:fragment="homeContent" class="container">
-    <div th:text="${user.getFirstName() + ' ' + user.getLastName()}"></div>
+    <div th:fragment="mainContent" class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                <div th:each="article : ${articles}">
+                    <div class="post-preview">
+                        <a th:href="@{/article/(id=${article.getArticle().getId()})}">
+                            <h2 th:text="${article.getArticle().getTitle()}" class="post-title"></h2>
+                            <h3 th:text="${article.getArticle().getSubtitle()}" class="post-subtitle"></h3>
+                        </a>
+                        <p class="post-meta">Posted by <a th:text="${article.getUser()}"
+                                                          th:href="@{/user/(id=${article.getUser().getId()})}"></a> on
+                            September 24, 2014</p>
+                    </div>
+                    <hr/>
+                </div>
+                <hr/>
+                <!-- Pager -->
+                <ul class="pager">
+                    <li class="next">
+                        <a href="#">Older Posts &rarr;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <hr/>
 </div>
 </body>
 </html>

@@ -117,4 +117,9 @@ public class User {
     public void addGroup(UserGroup group) {
         this.groups.add(group);
     }
+
+    @Override
+    public String toString() {
+        return this.getFirstName() + " " + this.getLastName();
+    }
 }
